@@ -1,399 +1,439 @@
 ---
-import Layout from '~/layouts/PageLayout.astro';
-
-import Hero from '~/components/widgets/Hero.astro';
-import Note from '~/components/widgets/Note.astro';
-import Features from '~/components/widgets/Features.astro';
-import Features2 from '~/components/widgets/Features2.astro';
-import Steps from '~/components/widgets/Steps.astro';
-import Content from '~/components/widgets/Content.astro';
-import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
-import FAQs from '~/components/widgets/FAQs.astro';
-import Stats from '~/components/widgets/Stats.astro';
-import CallToAction from '~/components/widgets/CallToAction.astro';
+import PageLayout from '~/layouts/PageLayout.astro';
 
 const metadata = {
-  title: 'AstroWind — Free template for creating websites with Astro + Tailwind CSS',
+  title: 'The Complaint Portal Built for Self-Managed HOAs',
   ignoreTitleTemplate: true,
+  description:
+    'Track complaints, manage violations, and keep residents informed without enterprise bloat. Built for self-managed HOAs with 50-200 units.',
 };
 ---
 
-<Layout metadata={metadata}>
-  <!-- Hero Widget ******************* -->
+<PageLayout metadata={metadata}>
+  <section class="relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 pt-14 pb-16 md:pt-20 md:pb-20">
+      <div class="grid lg:grid-cols-2 gap-10 items-center">
+        <div>
+          <p class="text-sm uppercase tracking-[0.2em] text-sky-600 font-semibold">HOA Connect</p>
+          <h1 class="mt-4 text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-slate-900">
+            The Complaint Portal Built for Self-Managed HOAs
+          </h1>
+          <p class="mt-6 text-lg text-slate-600 max-w-2xl">
+            Track complaints, manage violations, and send transparent updates from one place. Purpose-built for
+            volunteer-led communities with 50-200 units.
+          </p>
+          <div class="mt-8 flex flex-wrap gap-3">
+            <a
+              href="#join-waitlist"
+              data-track-cta="hero_primary"
+              class="inline-flex items-center justify-center rounded-lg bg-sky-600 px-6 py-3 text-sm font-semibold text-white hover:bg-sky-500"
+            >
+              Join the Waitlist
+            </a>
+            <a
+              href="#features"
+              class="inline-flex items-center justify-center rounded-lg border border-slate-300 px-6 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-50"
+            >
+              See How It Works
+            </a>
+          </div>
+          <p class="mt-5 text-sm text-slate-500">
+            Validation goal: 100+ waitlist signups in 30 days from self-managed boards.
+          </p>
+        </div>
 
-  <Hero
-    actions={[
-      {
-        variant: 'primary',
-        text: 'Get template',
-        href: 'https://github.com/arthelokyo/astrowind',
-        target: '_blank',
-        icon: 'tabler:download',
-      },
-      { text: 'Learn more', href: '#features' },
-    ]}
-    image={{ src: '~/assets/images/hero-image.png', alt: 'AstroWind Hero Image' }}
-  >
-    <Fragment slot="title">
-      Free template for <span class="hidden xl:inline">creating websites with</span>
-      <span class="text-accent dark:text-white"> Astro 5.0</span> + Tailwind CSS
-    </Fragment>
+        <div class="rounded-2xl border border-slate-200 bg-white shadow-sm p-6 sm:p-8" id="join-waitlist">
+          <h2 class="text-xl font-semibold text-slate-900">Get Early Access</h2>
+          <p class="mt-2 text-sm text-slate-600">
+            Join the founding waitlist and get launch pricing updates as soon as HOA Connect opens beta.
+          </p>
 
-    <Fragment slot="subtitle">
-      <span class="hidden sm:inline">
-        <span class="font-semibold">AstroWind</span> is a free, customizable and production-ready template for Astro 5.0
-        + Tailwind CSS.</span
-      >
-      <span class="block mb-1 sm:hidden font-bold text-blue-600">AstroWind: Production-ready.</span>
-      Suitable for Startups, Small Business, SaaS websites, Professional Portfolios, Marketing websites, Landing Pages &
-      Blogs.
-    </Fragment>
-  </Hero>
+          <form class="js-waitlist-form mt-6 space-y-4" novalidate>
+            <div>
+              <label for="waitlist-email-hero" class="block text-sm font-medium text-slate-800">Email</label>
+              <input
+                id="waitlist-email-hero"
+                name="email"
+                type="email"
+                autocomplete="email"
+                required
+                placeholder="board@yourhoa.org"
+                class="mt-1 w-full rounded-lg border border-slate-300 px-4 py-3 text-slate-900 placeholder:text-slate-400 focus:border-sky-500 focus:outline-none"
+              />
+            </div>
+            <div class="grid sm:grid-cols-2 gap-4">
+              <div>
+                <label for="waitlist-role-hero" class="block text-sm font-medium text-slate-800">Role (optional)</label>
+                <select
+                  id="waitlist-role-hero"
+                  name="role"
+                  class="mt-1 w-full rounded-lg border border-slate-300 px-4 py-3 text-slate-900 focus:border-sky-500 focus:outline-none"
+                >
+                  <option value="">Select role</option>
+                  <option value="board_member">Board member</option>
+                  <option value="resident">Resident</option>
+                  <option value="property_manager">Property manager</option>
+                </select>
+              </div>
+              <div>
+                <label for="waitlist-size-hero" class="block text-sm font-medium text-slate-800"
+                  >HOA size (optional)</label
+                >
+                <select
+                  id="waitlist-size-hero"
+                  name="hoa_size"
+                  class="mt-1 w-full rounded-lg border border-slate-300 px-4 py-3 text-slate-900 focus:border-sky-500 focus:outline-none"
+                >
+                  <option value="">Select size</option>
+                  <option value="1-25">1-25 units</option>
+                  <option value="26-50">26-50 units</option>
+                  <option value="51-100">51-100 units</option>
+                  <option value="101-200">101-200 units</option>
+                  <option value="201+">201+ units</option>
+                </select>
+              </div>
+            </div>
 
-  <!-- Note Widget ******************* -->
+            <button
+              type="submit"
+              data-track-cta="waitlist_submit_hero"
+              class="w-full rounded-lg bg-sky-600 px-4 py-3 font-semibold text-white hover:bg-sky-500 disabled:opacity-60"
+            >
+              Join Waitlist
+            </button>
+            <p class="js-form-message text-sm min-h-[1.25rem] text-slate-600" aria-live="polite"></p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <Note title="Philosophy:" description="Simplicity, Best Practices and High Performance" />
+  <section id="features" class="border-y border-slate-200 bg-slate-50/60">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-16 md:py-20">
+      <div class="max-w-3xl">
+        <p class="text-sm uppercase tracking-[0.2em] text-sky-600 font-semibold">Why Boards Switch</p>
+        <h2 class="mt-3 text-3xl md:text-4xl font-bold text-slate-900">Stop losing complaints in inbox chaos</h2>
+        <p class="mt-4 text-slate-600">
+          Research with HOA communities shows the same pattern: complaints disappear in email threads, residents feel
+          ignored, and volunteer board members burn out trying to keep up.
+        </p>
+      </div>
 
-  <!-- Features Widget *************** -->
+      <div class="mt-10 grid md:grid-cols-2 gap-5">
+        <article class="rounded-xl border border-slate-200 bg-white p-6">
+          <h3 class="text-lg font-semibold text-slate-900">Scattered communication</h3>
+          <p class="mt-2 text-slate-600">
+            Requests arrive via calls, texts, and emails with no central source of truth.
+          </p>
+        </article>
+        <article class="rounded-xl border border-slate-200 bg-white p-6">
+          <h3 class="text-lg font-semibold text-slate-900">Inconsistent enforcement</h3>
+          <p class="mt-2 text-slate-600">
+            Violations and follow-ups slip through without clear ownership and timestamps.
+          </p>
+        </article>
+        <article class="rounded-xl border border-slate-200 bg-white p-6">
+          <h3 class="text-lg font-semibold text-slate-900">Resident frustration</h3>
+          <p class="mt-2 text-slate-600">Homeowners don’t know status, timelines, or who is handling their issue.</p>
+        </article>
+        <article class="rounded-xl border border-slate-200 bg-white p-6">
+          <h3 class="text-lg font-semibold text-slate-900">Enterprise tool overload</h3>
+          <p class="mt-2 text-slate-600">
+            Most alternatives are bloated, expensive, and built for management companies.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
 
-  <Features
-    id="features"
-    tagline="Features"
-    title="What you get with AstroWind"
-    subtitle="One of the most professional and comprehensive templates currently on the market. Most starred & forked Astro theme in 2022, 2023 and 2024."
-    items={[
-      {
-        title: 'Astro + Tailwind CSS Integration',
-        description:
-          'A seamless integration between two great frameworks that offer high productivity, performance and versatility.',
-        icon: 'tabler:brand-tailwind',
-      },
-      {
-        title: 'Ready-to-use Components',
-        description:
-          'Widgets made with Tailwind CSS ready to be used in Marketing Websites, SaaS, Blogs, Personal Profiles, Small Business...',
-        icon: 'tabler:components',
-      },
-      {
-        title: 'Best Practices',
-        description:
-          'Creating secure, efficient, and user-friendly websites that deliver exceptional experiences and lasting value.',
-        icon: 'tabler:list-check',
-      },
-      {
-        title: 'Excellent Page Speed',
-        description:
-          'Having a good page speed impacts organic search ranking, improves user experience (UI/UX) and increase conversion rates.',
-        icon: 'tabler:rocket',
-      },
-      {
-        title: 'Search Engine Optimization (SEO)',
-        description:
-          "SEO lies in its ability to enhance a website's visibility, driving organic traffic and enabling it to reach a wider audience.",
-        icon: 'tabler:arrows-right-left',
-      },
-      {
-        title: 'Open to new ideas and contributions',
-        description:
-          'Embracing a culture that is open to new ideas and contributions is integral fostering innovation, collaboration, and a dynamic user experience.',
-        icon: 'tabler:bulb',
-      },
-    ]}
-  />
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 py-16 md:py-20">
+    <div class="text-center max-w-3xl mx-auto">
+      <p class="text-sm uppercase tracking-[0.2em] text-sky-600 font-semibold">How It Works</p>
+      <h2 class="mt-3 text-3xl md:text-4xl font-bold text-slate-900">Three steps to a calmer HOA workflow</h2>
+    </div>
 
-  <!-- Content Widget **************** -->
+    <div class="mt-12 grid md:grid-cols-3 gap-6">
+      <article class="rounded-xl border border-slate-200 p-6">
+        <p class="text-sm font-semibold text-sky-600">Step 1</p>
+        <h3 class="mt-2 text-xl font-semibold text-slate-900">Residents submit</h3>
+        <p class="mt-2 text-slate-600">Complaints and violation reports go into one portal with required context.</p>
+      </article>
+      <article class="rounded-xl border border-slate-200 p-6">
+        <p class="text-sm font-semibold text-sky-600">Step 2</p>
+        <h3 class="mt-2 text-xl font-semibold text-slate-900">Board triages</h3>
+        <p class="mt-2 text-slate-600">Assign owners, set priority, and track outcomes through a shared board view.</p>
+      </article>
+      <article class="rounded-xl border border-slate-200 p-6">
+        <p class="text-sm font-semibold text-sky-600">Step 3</p>
+        <h3 class="mt-2 text-xl font-semibold text-slate-900">Everyone stays updated</h3>
+        <p class="mt-2 text-slate-600">Automatic status updates reduce back-and-forth and improve trust.</p>
+      </article>
+    </div>
+  </section>
 
-  <Content
-    isReversed
-    tagline="Inside template"
-    title="AstroWind's Blueprint: Fun Meets Functionality!"
-    items={[
-      {
-        title: 'Built on top of Astro 5.0',
-        description:
-          'Benefiting from the performance and developer-friendly features of this modern static site generator.',
-      },
-      {
-        title: 'Styled using Tailwind CSS',
-        description:
-          'Facilitating rapid design and consistent styling with this highly popular utility-first CSS framework.',
-      },
-      {
-        title: 'Cross-browser compatibility',
-        description:
-          'Ensure your website looks and functions consistently across various web browsers, delivering a seamless experience to all users.',
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-      alt: 'Colorful Image',
-    }}
-  >
-    <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Building on modern foundations</h3>
-      Gain a competitive advantage by incorporating industry leading practices
-    </Fragment>
+  <section id="pricing" class="border-y border-slate-200 bg-slate-50/60">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-16 md:py-20">
+      <div class="max-w-3xl">
+        <p class="text-sm uppercase tracking-[0.2em] text-sky-600 font-semibold">Pricing Preview</p>
+        <h2 class="mt-3 text-3xl md:text-4xl font-bold text-slate-900">Simple pricing for volunteer-led communities</h2>
+      </div>
 
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
-    </Fragment>
-  </Content>
+      <div class="mt-10 grid lg:grid-cols-2 gap-6">
+        <article class="rounded-xl border border-slate-200 bg-white p-6">
+          <p class="text-sm text-slate-500">Starter</p>
+          <p class="mt-2 text-4xl font-bold text-slate-900">$49<span class="text-lg text-slate-500">/mo</span></p>
+          <p class="mt-2 text-slate-600">Best for HOAs up to 100 units.</p>
+          <ul class="mt-4 space-y-2 text-slate-700 list-disc pl-5">
+            <li>Complaint tracking portal</li>
+            <li>Violation workflow</li>
+            <li>Automated resident updates</li>
+          </ul>
+        </article>
+        <article class="rounded-xl border border-sky-300 bg-white p-6 shadow-sm">
+          <p class="text-sm text-slate-500">Professional</p>
+          <p class="mt-2 text-4xl font-bold text-slate-900">$99<span class="text-lg text-slate-500">/mo</span></p>
+          <p class="mt-2 text-slate-600">Best for communities with 101-200 units.</p>
+          <ul class="mt-4 space-y-2 text-slate-700 list-disc pl-5">
+            <li>Everything in Starter</li>
+            <li>Priority onboarding support</li>
+            <li>Enhanced board reporting</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
 
-  <!-- Content Widget **************** -->
+  <section class="max-w-4xl mx-auto px-4 sm:px-6 py-16 md:py-20">
+    <div class="rounded-2xl border border-slate-200 bg-white p-8 sm:p-10 text-center shadow-sm">
+      <p class="text-sm uppercase tracking-[0.2em] text-sky-600 font-semibold">Get Early Access</p>
+      <h2 class="mt-3 text-3xl font-bold text-slate-900">Help shape HOA Connect before public launch</h2>
+      <p class="mt-3 text-slate-600">
+        Join the waitlist to get beta access, launch updates, and early pricing details.
+      </p>
 
-  <Content
-    isAfterContent
-    items={[
-      {
-        title: 'High level of customization',
-        description: `Tailor the template effortlessly to match your brand's identity and requirements, making your website distinct and saving you time.`,
-      },
-      {
-        title: 'Multiple layout possibilities',
-        description:
-          'Explore various layout options to find the structure that best presents your content, enhancing user engagement and navigation.',
-      },
-      {
-        title: 'Fully responsive design',
-        description:
-          "Ensure your website's optimal performance on various devices and screen sizes, providing a consistent and enjoyable user experience.",
-      },
-      {
-        title: 'Integration of media',
-        description:
-          'Seamlessly incorporate images, videos, and multimedia elements that enhance your content and engage visitors effectively.',
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1600132806370-bf17e65e942f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2194&q=80',
-      alt: 'Blueprint Image',
-    }}
-  >
-    <Fragment slot="content">Ensure your online presence truly represents you.</Fragment>
+      <form class="js-waitlist-form mt-8 max-w-2xl mx-auto space-y-4" novalidate>
+        <div class="grid sm:grid-cols-[1fr_auto] gap-3">
+          <input
+            name="email"
+            type="email"
+            autocomplete="email"
+            required
+            placeholder="board@yourhoa.org"
+            class="w-full rounded-lg border border-slate-300 px-4 py-3 text-slate-900 placeholder:text-slate-400 focus:border-sky-500 focus:outline-none"
+          />
+          <button
+            type="submit"
+            data-track-cta="waitlist_submit_footer"
+            class="rounded-lg bg-sky-600 px-6 py-3 font-semibold text-white hover:bg-sky-500 disabled:opacity-60"
+          >
+            Request Invite
+          </button>
+        </div>
+        <input type="hidden" name="role" value="board_member" />
+        <input type="hidden" name="hoa_size" value="51-100" />
+        <p class="js-form-message text-sm min-h-[1.25rem] text-slate-600" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
 
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
-    </Fragment>
-  </Content>
+  <script>
+    const STORAGE_KEY = 'hoa_connect_first_touch_utm';
+    const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-  <!-- Content Widget **************** -->
+    /**
+     * @typedef {{
+     *   email: string;
+     *   role?: string;
+     *   hoa_size?: string;
+     *   utm_source?: string;
+     *   utm_medium?: string;
+     *   utm_campaign?: string;
+     * }} WaitlistPayload
+     */
 
-  <Content
-    isReversed
-    isAfterContent
-    items={[
-      {
-        title: 'Enhanced user engagement',
-        description:
-          'Captivate your audience with interactive elements, intuitive navigation, and visually appealing layouts, encouraging longer visits.',
-      },
-      {
-        title: 'Continuous improvement',
-        description:
-          'Ensure your website stays aligned with the latest trends and technologies through regular updates and enhancements.',
-      },
-      {
-        title: 'Time and resource efficiency',
-        description:
-          'Skip the time-consuming process of building a website from scratch and launch your online presence sooner with AstroWind.',
-      },
-      {
-        title: 'Community support',
-        description: `Join the growing AstroWind community for insights, resources, and assistance, ensuring you're never alone on your web development journey.`,
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1611462985358-60d3498e0364?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-      alt: 'Astronauts Image',
-    }}
-  >
-    <Fragment slot="content">Designed to foster growth and success.</Fragment>
+    /**
+     * @param {string} eventName
+     * @param {Record<string, unknown>} [props]
+     */
+    const track = (eventName, props = {}) => {
+      if (typeof window !== 'undefined' && typeof window.plausible === 'function') {
+        window.plausible(eventName, { props });
+      }
+    };
 
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
-    </Fragment>
-  </Content>
+    const captureFirstTouchUtm = () => {
+      const params = new URLSearchParams(window.location.search);
+      const next = {
+        utm_source: params.get('utm_source') || undefined,
+        utm_medium: params.get('utm_medium') || undefined,
+        utm_campaign: params.get('utm_campaign') || undefined,
+      };
 
-  <!-- Steps Widget ****************** -->
+      if (!next.utm_source && !next.utm_medium && !next.utm_campaign) {
+        return;
+      }
 
-  <Steps
-    title="Get your dream website up and running in no time with AstroWind."
-    items={[
-      {
-        title: 'Step 1: <span class="font-medium">Download</span>',
-        description:
-          "Kickstart with GitHub! Either fork the AstroWind template or simply click 'Use this template'. Your canvas awaits, ready for your digital masterpiece. In just a few clicks, you've already set the foundation.",
-        icon: 'tabler:package',
-      },
-      {
-        title: 'Step 2: <span class="font-medium">Add content</span>',
-        description:
-          "Pour your vision into it. Add images, text, and all that jazz to breathe life into your digital space. Remember, it's the content that tells your story, so make it captivating.",
-        icon: 'tabler:letter-case',
-      },
-      {
-        title: 'Step 3: <span class="font-medium">Customize styles</span>',
-        description:
-          'Give it your personal touch. Tailor colors, fonts, and layouts until it feels just right. Your unique flair, amplified by AstroWind! Precision in design ensures a seamless user experience.',
-        icon: 'tabler:paint',
-      },
-      {
-        title: 'Ready!',
-        icon: 'tabler:check',
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1616198814651-e71f960c3180?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80',
-      alt: 'Steps image',
-    }}
-  />
+      if (!localStorage.getItem(STORAGE_KEY)) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
+      }
+    };
 
-  <!-- Features2 Widget ************** -->
+    const getStoredUtm = () => {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        return raw ? JSON.parse(raw) : {};
+      } catch {
+        return {};
+      }
+    };
 
-  <Features2
-    title="Most used widgets"
-    subtitle="Provides frequently used components for building websites using Tailwind CSS"
-    tagline="Components"
-    items={[
-      {
-        title: 'Headers',
-        description: "Ever tried driving without GPS? Boom! That's why websites need headers for direction.",
-        icon: 'flat-color-icons:template',
-      },
-      {
-        title: 'Heros',
-        description:
-          "Picture a superhero landing – epic, right? That's the job of a Hero section, making grand entrances!",
-        icon: 'flat-color-icons:gallery',
-      },
-      {
-        title: 'Features',
-        description:
-          'Where websites strut their stuff and show off superpowers. No holding back on the bragging rights here!',
-        icon: 'flat-color-icons:approval',
-      },
-      {
-        title: 'Content',
-        description:
-          "Dive into the meat and potatoes of a site; without it, you'd just be window shopping. Content is king.",
-        icon: 'flat-color-icons:document',
-      },
-      {
-        title: 'Call-to-Action',
-        description:
-          'That enthusiastic friend who\'s always urging, "Do it! Do it!"? Yeah, that\'s this button nudging you towards adventure.',
-        icon: 'flat-color-icons:advertising',
-      },
-      {
-        title: 'Pricing',
-        description: 'Behold the dessert menu of the website world. Tempting choices await, can you resist?',
-        icon: 'flat-color-icons:currency-exchange',
-      },
-      {
-        title: 'Testimonial',
-        description: 'Step into the gossip corner! Here, other visitors spill the beans and share the juicy details.',
-        icon: 'flat-color-icons:voice-presentation',
-      },
-      {
-        title: 'Contact',
-        description:
-          'Like a digital mailbox, but faster! Drop a line, ask a question, or send a virtual high-five. Ding! Message in.',
-        icon: 'flat-color-icons:business-contact',
-      },
-      {
-        title: 'Footers',
-        description: "The footer's like the credits of a movie but sprinkled with easter eggs. Time to hunt!",
-        icon: 'flat-color-icons:database',
-      },
-    ]}
-  >
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
-    </Fragment>
-  </Features2>
+    const endpoint = (() => {
+      const supabaseUrl = import.meta.env.PUBLIC_SUPABASE_URL;
+      return supabaseUrl ? `${supabaseUrl}/functions/v1/waitlist-signup` : '';
+    })();
 
-  <!-- HighlightedPosts Widget ******* -->
+    const supabaseAnonKey = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 
-  <BlogLatestPosts
-    title="Find out more content in our Blog"
-    information={`The blog is used to display AstroWind documentation.
-                        Each new article will be an important step that you will need to know to be an expert in creating a website using Astro + Tailwind CSS.
-                        Astro is a very interesting technology. Thanks.
-                `}
-  />
+    /**
+     * @param {HTMLFormElement} form
+     * @param {string} text
+     * @param {'default' | 'error' | 'success'} [tone]
+     */
+    const setMessage = (form, text, tone = 'default') => {
+      const el = form.querySelector('.js-form-message');
+      if (!el) {
+        return;
+      }
+      el.textContent = text;
+      el.classList.remove('text-red-600', 'text-emerald-700', 'text-slate-600');
+      if (tone === 'error') {
+        el.classList.add('text-red-600');
+      } else if (tone === 'success') {
+        el.classList.add('text-emerald-700');
+      } else {
+        el.classList.add('text-slate-600');
+      }
+    };
 
-  <!-- FAQs Widget ******************* -->
+    /**
+     * @param {HTMLFormElement} form
+     * @param {boolean} isSubmitting
+     */
+    const setSubmitting = (form, isSubmitting) => {
+      const button = form.querySelector('button[type="submit"]');
+      if (button) {
+        button.disabled = isSubmitting;
+      }
+    };
 
-  <FAQs
-    title="Frequently Asked Questions"
-    subtitle="Dive into the following questions to gain insights into the powerful features that AstroWind offers and how it can elevate your web development journey."
-    tagline="FAQs"
-    classes={{ container: 'max-w-6xl' }}
-    items={[
-      {
-        title: 'Why AstroWind?',
-        description:
-          "Michael Knight a young loner on a crusade to champion the cause of the innocent. The helpless. The powerless in a world of criminals who operate above the law. Here he comes Here comes Speed Racer. He's a demon on wheels.",
-      },
-      {
-        title: 'What do I need to start?',
-        description:
-          'Space, the final frontier. These are the voyages of the Starship Enterprise. Its five-year mission: to explore strange new worlds. Many say exploration is part of our destiny, but it’s actually our duty to future generations.',
-      },
-      {
-        title: 'How to install the Astro + Tailwind CSS template?',
-        description:
-          "Well, the way they make shows is, they make one show. That show's called a pilot. Then they show that show to the people who make shows, and on the strength of that one show they decide if they're going to make more shows.",
-      },
-      {
-        title: "What's something that you don't understand?",
-        description:
-          "A flower in my garden, a mystery in my panties. Heart attack never stopped old Big Bear. I didn't even know we were calling him Big Bear.",
-      },
-      {
-        title: 'What is something that you would like to try again?',
-        description:
-          "A business big enough that it could be listed on the NASDAQ goes belly up. Disappears! It ceases to exist without me. No, you clearly don't know who you're talking to, so let me clue you in.",
-      },
-      {
-        title: 'If you could only ask one question to each person you meet, what would that question be?',
-        description:
-          "This is not about revenge. This is about justice. A lot of things can change in twelve years, Admiral. Well, that's certainly good to know. About four years. I got tired of hearing how young I looked.",
-      },
-    ]}
-  />
+    /**
+     * @param {WaitlistPayload} payload
+     * @param {string} anonKey
+     */
+    const submitWaitlist = async (payload, anonKey) => {
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          apikey: anonKey,
+          Authorization: `Bearer ${anonKey}`,
+        },
+        body: JSON.stringify(payload),
+      });
 
-  <!-- Stats Widget ****************** -->
+      const data = await response.json().catch(() => ({}));
 
-  <Stats
-    stats={[
-      { title: 'Downloads', amount: '132K' },
-      { title: 'Stars', amount: '24.8K' },
-      { title: 'Forks', amount: '10.3K' },
-      { title: 'Users', amount: '48.4K' },
-    ]}
-  />
+      if (!response.ok) {
+        return { ok: false, code: data?.code || 'SERVER_ERROR' };
+      }
 
-  <!-- CallToAction Widget *********** -->
+      return { ok: true, status: data?.status || 'created' };
+    };
 
-  <CallToAction
-    actions={[
-      {
-        variant: 'primary',
-        text: 'Get template',
-        href: 'https://github.com/arthelokyo/astrowind',
-        target: '_blank',
-        icon: 'tabler:download',
-      },
-    ]}
-  >
-    <Fragment slot="title">
-      Astro&nbsp;+&nbsp;<br class="block sm:hidden" /><span class="sm:whitespace-nowrap">Tailwind CSS</span>
-    </Fragment>
+    const initWaitlistForms = () => {
+      const forms = document.querySelectorAll<HTMLFormElement>('form.js-waitlist-form');
+      if (!forms.length) {
+        return;
+      }
 
-    <Fragment slot="subtitle">
-      Be very surprised by these huge fake numbers you are seeing on this page. <br class="hidden md:inline" />Don't
-      waste more time! :P
-    </Fragment>
-  </CallToAction>
-</Layout>
+      track('waitlist_form_view', { path: window.location.pathname });
+
+      forms.forEach((form) => {
+        form.addEventListener('submit', async (event) => {
+          event.preventDefault();
+
+          const formData = new FormData(form);
+          const email = String(formData.get('email') || '')
+            .trim()
+            .toLowerCase();
+          const role = String(formData.get('role') || '').trim();
+          const hoaSize = String(formData.get('hoa_size') || '').trim();
+
+          if (!EMAIL_RE.test(email)) {
+            setMessage(form, 'Enter a valid email address.', 'error');
+            track('waitlist_error', { code: 'INVALID_EMAIL' });
+            return;
+          }
+
+          if (!endpoint || !supabaseAnonKey) {
+            setMessage(form, 'Signup is temporarily unavailable. Please try again soon.', 'error');
+            track('waitlist_error', { code: 'CONFIG_MISSING' });
+            return;
+          }
+
+          const utm = getStoredUtm();
+          const payload = {
+            email,
+            role: role || undefined,
+            hoa_size: hoaSize || undefined,
+            utm_source: utm.utm_source,
+            utm_medium: utm.utm_medium,
+            utm_campaign: utm.utm_campaign,
+          };
+
+          setSubmitting(form, true);
+          setMessage(form, 'Submitting...');
+          track('waitlist_submit', { form: form.id || 'waitlist_form' });
+
+          try {
+            const result = await submitWaitlist(payload, supabaseAnonKey);
+
+            if (!result.ok) {
+              setMessage(form, 'Could not submit right now. Please try again.', 'error');
+              track('waitlist_error', { code: result.code });
+              return;
+            }
+
+            if (result.status === 'duplicate') {
+              setMessage(form, 'You are already on the waitlist. We will keep you posted.', 'success');
+            } else {
+              setMessage(form, 'You are in. We will send launch updates to your inbox.', 'success');
+              form.reset();
+            }
+
+            track('waitlist_success', { status: result.status });
+          } catch {
+            setMessage(form, 'Network error. Please try again in a moment.', 'error');
+            track('waitlist_error', { code: 'NETWORK_ERROR' });
+          } finally {
+            setSubmitting(form, false);
+          }
+        });
+      });
+    };
+
+    const initCtaTracking = () => {
+      const ctas = document.querySelectorAll('[data-track-cta]');
+      ctas.forEach((cta) => {
+        cta.addEventListener('click', () => {
+          const name = cta.getAttribute('data-track-cta') || 'unknown';
+          track('cta_click_primary', { name });
+        });
+      });
+    };
+
+    captureFirstTouchUtm();
+    initWaitlistForms();
+    initCtaTracking();
+  </script>
+</PageLayout>

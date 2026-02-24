@@ -1,6 +1,9 @@
 ---
 import { GoogleAnalytics } from '@astrolib/analytics';
 import { ANALYTICS } from 'astrowind:config';
+
+const plausibleDomain = import.meta.env.PUBLIC_PLAUSIBLE_DOMAIN;
+const plausibleApiHost = (import.meta.env.PUBLIC_PLAUSIBLE_API_HOST || 'https://plausible.io').replace(/\/$/, '');
 ---
 
 {
@@ -9,5 +12,11 @@ import { ANALYTICS } from 'astrowind:config';
       id={String(ANALYTICS.vendors.googleAnalytics.id)}
       partytown={ANALYTICS?.vendors?.googleAnalytics?.partytown}
     />
+  ) : null
+}
+
+{
+  plausibleDomain ? (
+    <script is:inline defer data-domain={plausibleDomain} src={`${plausibleApiHost}/js/script.js`} />
   ) : null
 }

@@ -5,7 +5,7 @@ layout: '~/layouts/MarkdownLayout.astro'
 
 _Last updated_: February 24, 2026
 
-These Terms govern access to the HOA Connect pre-launch landing page and waitlist.
+These Terms govern access to the HOA Connect website and waitlist.
 
 ## Use of the Service
 
@@ -17,11 +17,11 @@ By joining the waitlist, you consent to receive product updates and launch-relat
 
 ## No Warranty
 
-The pre-launch site and all information are provided "as is" without warranties of any kind.
+The site and all information are provided "as is" without warranties of any kind.
 
 ## Limitation of Liability
 
-To the maximum extent allowed by law, HOA Connect is not liable for indirect, incidental, special, consequential, or punitive damages related to use of this pre-launch site.
+To the maximum extent allowed by law, HOA Connect is not liable for indirect, incidental, special, consequential, or punitive damages related to use of this site.
 
 ## Changes
 

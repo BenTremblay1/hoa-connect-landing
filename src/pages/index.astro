@@ -1,436 +1,1220 @@
----
-import PageLayout from '~/layouts/PageLayout.astro';
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HOA Connect - Stop Managing HOA Complaints in Your Inbox</title>
+    <meta
+      name="description"
+      content="The simple tool for self-managed HOAs to track violations and keep residents happy. No complex accounting features—just peace of mind."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-const metadata = {
-  title: 'The Complaint Portal Built for Self-Managed HOAs',
-  ignoreTitleTemplate: true,
-  description:
-    'Track complaints, manage violations, and keep residents informed without enterprise bloat. Built for self-managed HOAs with 50-200 units.',
-};
----
+      :root {
+        --primary: #0f172a;
+        --secondary: #10b981;
+        --secondary-dark: #059669;
+        --background: #f8fafc;
+        --background-alt: #ffffff;
+        --text: #334155;
+        --text-light: #64748b;
+        --text-dark: #1e293b;
+        --accent: #f43f5e;
+        --border: #e2e8f0;
+        --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      }
 
-<PageLayout metadata={metadata}>
-  <section class="relative">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 pt-14 pb-16 md:pt-20 md:pb-20">
-      <div class="grid lg:grid-cols-2 gap-10 items-center">
-        <div>
-          <p class="text-sm uppercase tracking-[0.2em] text-sky-600 font-semibold">HOA Connect</p>
-          <h1 class="mt-4 text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-slate-900">
-            The Complaint Portal Built for Self-Managed HOAs
-          </h1>
-          <p class="mt-6 text-lg text-slate-600 max-w-2xl">
-            Track complaints, manage violations, and send transparent updates from one place. Purpose-built for
-            volunteer-led communities with 50-200 units.
-          </p>
-          <div class="mt-8 flex flex-wrap gap-3">
-            <a
-              href="#join-waitlist"
-              data-track-cta="hero_primary"
-              class="inline-flex items-center justify-center rounded-lg bg-sky-600 px-6 py-3 text-sm font-semibold text-white hover:bg-sky-500"
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family:
+          'Inter',
+          -apple-system,
+          BlinkMacSystemFont,
+          'Segoe UI',
+          Roboto,
+          sans-serif;
+        line-height: 1.6;
+        color: var(--text);
+        background-color: var(--background);
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 24px;
+      }
+
+      /* Navigation */
+      nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        z-index: 1000;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .nav-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 16px 24px;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-weight: 800;
+        font-size: 24px;
+        color: var(--primary);
+        text-decoration: none;
+      }
+
+      .logo-icon {
+        width: 36px;
+        height: 36px;
+        background: var(--secondary);
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: 700;
+        font-size: 18px;
+      }
+
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 32px;
+      }
+
+      .nav-links a {
+        color: var(--text);
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 15px;
+        transition: color 0.2s;
+      }
+
+      .nav-links a:hover {
+        color: var(--secondary);
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 12px 24px;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 15px;
+        text-decoration: none;
+        cursor: pointer;
+        border: none;
+        transition: all 0.2s;
+      }
+
+      .btn-primary {
+        background: var(--secondary);
+        color: white;
+      }
+
+      .btn-primary:hover {
+        background: var(--secondary-dark);
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-lg);
+      }
+
+      .btn-outline {
+        background: transparent;
+        color: var(--primary);
+        border: 2px solid var(--primary);
+      }
+
+      .btn-outline:hover {
+        background: var(--primary);
+        color: white;
+      }
+
+      /* Mobile Menu */
+      .mobile-menu-btn {
+        display: none;
+        flex-direction: column;
+        gap: 5px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 8px;
+      }
+
+      .mobile-menu-btn span {
+        width: 24px;
+        height: 2px;
+        background: var(--primary);
+        transition: all 0.3s;
+      }
+
+      /* Hero Section */
+      .hero {
+        padding: 160px 0 100px;
+        background: linear-gradient(180deg, #ffffff 0%, var(--background) 100%);
+      }
+
+      .hero-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 64px;
+        align-items: center;
+      }
+
+      .hero-text h1 {
+        font-size: 56px;
+        font-weight: 800;
+        color: var(--primary);
+        line-height: 1.1;
+        margin-bottom: 24px;
+      }
+
+      .hero-text h1 span {
+        color: var(--secondary);
+      }
+
+      .hero-text p {
+        font-size: 20px;
+        color: var(--text-light);
+        margin-bottom: 32px;
+        line-height: 1.7;
+      }
+
+      .hero-form {
+        display: flex;
+        gap: 12px;
+        max-width: 480px;
+      }
+
+      .hero-form input {
+        flex: 1;
+        padding: 16px 20px;
+        border: 2px solid var(--border);
+        border-radius: 8px;
+        font-size: 16px;
+        font-family: inherit;
+        transition: border-color 0.2s;
+      }
+
+      .hero-form input:focus {
+        outline: none;
+        border-color: var(--secondary);
+      }
+
+      .hero-form .btn {
+        white-space: nowrap;
+      }
+
+      .form-message {
+        margin-top: 12px;
+        font-size: 14px;
+        display: none;
+      }
+
+      .form-message.success {
+        color: var(--secondary);
+        display: block;
+      }
+
+      .form-message.error {
+        color: var(--accent);
+        display: block;
+      }
+      .cta .form-message.success {
+        color: #ffffff;
+      }
+      .cta .form-message.error {
+        color: #fecaca;
+      }
+
+      .hero-visual {
+        position: relative;
+      }
+
+      .hero-image {
+        width: 100%;
+        border-radius: 16px;
+        box-shadow: var(--shadow-lg);
+      }
+
+      .hero-card {
+        position: absolute;
+        background: white;
+        padding: 16px 20px;
+        border-radius: 12px;
+        box-shadow: var(--shadow-lg);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .hero-card-1 {
+        top: 20%;
+        right: -20px;
+        animation: float 3s ease-in-out infinite;
+      }
+
+      .hero-card-2 {
+        bottom: 20%;
+        left: -20px;
+        animation: float 3s ease-in-out infinite 1.5s;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+
+      .hero-card-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+      }
+
+      .hero-card-icon.green {
+        background: #d1fae5;
+        color: var(--secondary);
+      }
+
+      .hero-card-icon.red {
+        background: #ffe4e6;
+        color: var(--accent);
+      }
+
+      .hero-card-text {
+        font-size: 14px;
+      }
+
+      .hero-card-text strong {
+        display: block;
+        color: var(--text-dark);
+        font-weight: 600;
+      }
+
+      .hero-card-text span {
+        color: var(--text-light);
+        font-size: 13px;
+      }
+
+      /* Problem Section */
+      .problem {
+        padding: 100px 0;
+        background: var(--primary);
+        color: white;
+      }
+
+      .section-header {
+        text-align: center;
+        max-width: 700px;
+        margin: 0 auto 64px;
+      }
+
+      .section-header h2 {
+        font-size: 40px;
+        font-weight: 700;
+        margin-bottom: 16px;
+      }
+
+      .section-header p {
+        font-size: 18px;
+        color: rgba(255, 255, 255, 0.7);
+      }
+
+      .problem-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 32px;
+      }
+
+      .problem-card {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 16px;
+        padding: 32px;
+        text-align: center;
+        transition: all 0.3s;
+      }
+
+      .problem-card:hover {
+        background: rgba(255, 255, 255, 0.1);
+        transform: translateY(-4px);
+      }
+
+      .problem-icon {
+        width: 64px;
+        height: 64px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 20px;
+        font-size: 28px;
+      }
+
+      .problem-card h3 {
+        font-size: 20px;
+        font-weight: 600;
+        margin-bottom: 12px;
+      }
+
+      .problem-card p {
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 15px;
+      }
+
+      /* Features Section */
+      .features {
+        padding: 100px 0;
+        background: var(--background-alt);
+      }
+
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 32px;
+      }
+
+      .feature-card {
+        background: white;
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 32px;
+        transition: all 0.3s;
+      }
+
+      .feature-card:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-lg);
+      }
+
+      .feature-icon {
+        width: 56px;
+        height: 56px;
+        background: #d1fae5;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 20px;
+        font-size: 24px;
+      }
+
+      .feature-card h3 {
+        font-size: 20px;
+        font-weight: 600;
+        color: var(--text-dark);
+        margin-bottom: 12px;
+      }
+
+      .feature-card p {
+        color: var(--text-light);
+        font-size: 15px;
+        line-height: 1.7;
+      }
+
+      /* Pricing Section */
+      .pricing {
+        padding: 100px 0;
+        background: var(--background);
+      }
+
+      .pricing-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 32px;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .pricing-card {
+        background: white;
+        border: 2px solid var(--border);
+        border-radius: 20px;
+        padding: 40px;
+        text-align: center;
+        transition: all 0.3s;
+        position: relative;
+      }
+
+      .pricing-card.featured {
+        border-color: var(--secondary);
+        transform: scale(1.02);
+      }
+
+      .pricing-card.featured::before {
+        content: 'Most Popular';
+        position: absolute;
+        top: -12px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: var(--secondary);
+        color: white;
+        padding: 4px 16px;
+        border-radius: 20px;
+        font-size: 13px;
+        font-weight: 600;
+      }
+
+      .pricing-card:hover {
+        box-shadow: var(--shadow-lg);
+      }
+
+      .pricing-card h3 {
+        font-size: 24px;
+        font-weight: 600;
+        color: var(--text-dark);
+        margin-bottom: 8px;
+      }
+
+      .pricing-card .units {
+        color: var(--text-light);
+        font-size: 15px;
+        margin-bottom: 24px;
+      }
+
+      .pricing-card .price {
+        font-size: 56px;
+        font-weight: 800;
+        color: var(--primary);
+        margin-bottom: 8px;
+      }
+
+      .pricing-card .price span {
+        font-size: 18px;
+        font-weight: 500;
+        color: var(--text-light);
+      }
+
+      .pricing-card .note {
+        color: var(--secondary);
+        font-size: 14px;
+        font-weight: 500;
+        margin-bottom: 32px;
+      }
+
+      .pricing-features {
+        list-style: none;
+        text-align: left;
+        margin-bottom: 32px;
+      }
+
+      .pricing-features li {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 12px 0;
+        border-bottom: 1px solid var(--border);
+        font-size: 15px;
+        color: var(--text);
+      }
+
+      .pricing-features li:last-child {
+        border-bottom: none;
+      }
+
+      .pricing-features .check {
+        color: var(--secondary);
+        font-weight: 700;
+      }
+
+      /* Why Section */
+      .why {
+        padding: 100px 0;
+        background: var(--primary);
+      }
+
+      .why-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 32px;
+      }
+
+      .why-item {
+        text-align: center;
+        color: white;
+      }
+
+      .why-number {
+        font-size: 48px;
+        font-weight: 800;
+        color: var(--secondary);
+        margin-bottom: 8px;
+      }
+
+      .why-item h4 {
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 8px;
+      }
+
+      .why-item p {
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.7);
+      }
+
+      /* CTA Section */
+      .cta {
+        padding: 100px 0;
+        background: linear-gradient(135deg, var(--secondary) 0%, #059669 100%);
+      }
+
+      .cta-content {
+        text-align: center;
+        max-width: 700px;
+        margin: 0 auto;
+      }
+
+      .cta h2 {
+        font-size: 44px;
+        font-weight: 700;
+        color: white;
+        margin-bottom: 16px;
+      }
+
+      .cta p {
+        font-size: 20px;
+        color: rgba(255, 255, 255, 0.9);
+        margin-bottom: 32px;
+      }
+
+      .cta .btn-white {
+        background: white;
+        color: var(--secondary);
+        font-size: 18px;
+        padding: 18px 40px;
+      }
+
+      .cta .btn-white:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-lg);
+      }
+
+      /* Footer */
+      footer {
+        padding: 40px 0;
+        background: var(--background-alt);
+        border-top: 1px solid var(--border);
+      }
+
+      .footer-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .footer-left {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .footer-left p {
+        color: var(--text-light);
+        font-size: 14px;
+      }
+
+      .footer-links {
+        display: flex;
+        gap: 24px;
+      }
+
+      .footer-links a {
+        color: var(--text-light);
+        text-decoration: none;
+        font-size: 14px;
+        transition: color 0.2s;
+      }
+
+      .footer-links a:hover {
+        color: var(--secondary);
+      }
+
+      /* Responsive Design */
+      @media (max-width: 1024px) {
+        .hero-content {
+          grid-template-columns: 1fr;
+          text-align: center;
+        }
+
+        .hero-form {
+          margin: 0 auto;
+        }
+
+        .hero-visual {
+          display: none;
+        }
+
+        .problem-grid,
+        .features-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .why-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (max-width: 768px) {
+        .nav-links {
+          display: none;
+        }
+
+        .mobile-menu-btn {
+          display: flex;
+        }
+
+        .hero-text h1 {
+          font-size: 40px;
+        }
+
+        .hero-form {
+          flex-direction: column;
+        }
+
+        .problem-grid,
+        .features-grid,
+        .pricing-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .section-header h2 {
+          font-size: 32px;
+        }
+
+        .why-grid {
+          grid-template-columns: 1fr 1fr;
+          gap: 24px;
+        }
+
+        .footer-content {
+          flex-direction: column;
+          gap: 24px;
+          text-align: center;
+        }
+
+        .footer-left {
+          flex-direction: column;
+        }
+      }
+
+      /* Mobile Menu Overlay */
+      .mobile-menu {
+        display: none;
+        position: fixed;
+        top: 70px;
+        left: 0;
+        right: 0;
+        background: white;
+        padding: 24px;
+        border-bottom: 1px solid var(--border);
+        box-shadow: var(--shadow-lg);
+        z-index: 999;
+      }
+
+      .mobile-menu.active {
+        display: block;
+      }
+
+      .mobile-menu a {
+        display: block;
+        padding: 16px 0;
+        color: var(--text);
+        text-decoration: none;
+        font-weight: 500;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .mobile-menu a:last-child {
+        border-bottom: none;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav>
+      <div class="nav-container">
+        <a href="/" class="logo">
+          <div class="logo-icon">HC</div>
+          HOA Connect
+        </a>
+        <div class="nav-links">
+          <a href="#features">Features</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#waitlist" class="btn btn-primary">Join Waitlist</a>
+        </div>
+        <button class="mobile-menu-btn" type="button" id="mobileMenuButton">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#features">Features</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#waitlist">Join Waitlist</a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-content">
+          <div class="hero-text">
+            <h1>Stop Managing HOA Complaints in Your <span>Inbox</span></h1>
+            <p>
+              The simple tool for self-managed communities to track violations and keep residents happy. No complex
+              accounting features—just peace of mind.
+            </p>
+            <form class="hero-form" id="waitlistForm">
+              <input type="email" placeholder="Enter your email address" required id="emailInput" />
+              <button type="submit" class="btn btn-primary">Get Early Access</button>
+            </form>
+            <div class="form-message" id="formMessage"></div>
+            <p style="font-size: 14px; color: var(--text-light); margin-top: 16px;">
+              Join 50+ HOAs on our waitlist. No spam, ever.
+            </p>
+          </div>
+          <div class="hero-visual">
+            <div
+              style="background: linear-gradient(135deg, #E0E7FF 0%, #C7D2FE 100%); border-radius: 16px; padding: 40px; min-height: 400px; display: flex; align-items: center; justify-content: center;"
             >
-              Join the Waitlist
-            </a>
-            <a
-              href="#features"
-              class="inline-flex items-center justify-center rounded-lg border border-slate-300 px-6 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-50"
-            >
-              See How It Works
-            </a>
+              <div style="text-align: center;">
+                <div style="font-size: 80px; margin-bottom: 16px;">🏠</div>
+                <div style="font-size: 20px; font-weight: 600; color: var(--primary);">HOA Connect Dashboard</div>
+                <div style="font-size: 14px; color: var(--text-light);">Complaint Tracking Made Simple</div>
+              </div>
+            </div>
+            <div class="hero-card hero-card-1">
+              <div class="hero-card-icon green">✓</div>
+              <div class="hero-card-text">
+                <strong>Complaint Resolved</strong>
+                <span>Pool maintenance issue</span>
+              </div>
+            </div>
+            <div class="hero-card hero-card-2">
+              <div class="hero-card-icon red">!</div>
+              <div class="hero-card-text">
+                <strong>New Violation</strong>
+                <span>Parking violation reported</span>
+              </div>
+            </div>
           </div>
         </div>
+      </div>
+    </section>
 
-        <div class="rounded-2xl border border-slate-200 bg-white shadow-sm p-6 sm:p-8" id="join-waitlist">
-          <h2 class="text-xl font-semibold text-slate-900">Get Early Access</h2>
-          <p class="mt-2 text-sm text-slate-600">
-            Join the founding waitlist and get launch pricing updates as soon as HOA Connect opens beta.
+    <!-- Problem Section -->
+    <section class="problem">
+      <div class="container">
+        <div class="section-header">
+          <h2>Sound Familiar?</h2>
+          <p>Managing an HOA shouldn't feel like a second job. Here's what board members deal with every day.</p>
+        </div>
+        <div class="problem-grid">
+          <div class="problem-card">
+            <div class="problem-icon">📊</div>
+            <h3>Spreadsheet Chaos</h3>
+            <p>
+              Tracking complaints in spreadsheets means lost entries, version conflicts, and no way for residents to
+              check status.
+            </p>
+          </div>
+          <div class="problem-card">
+            <div class="problem-icon">📧</div>
+            <h3>Lost in Email</h3>
+            <p>
+              Complaints buried in email threads, forgotten follow-ups, and no central record of what's been resolved.
+            </p>
+          </div>
+          <div class="problem-card">
+            <div class="problem-icon">😤</div>
+            <h3>Angry Neighbors</h3>
+            <p>Residents frustrated by lack of communication, not knowing if their complaint was even received.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+      <div class="container">
+        <div class="section-header">
+          <h2>Everything You Need, Nothing You Don't</h2>
+          <p>We built exactly what self-managed HOAs need—no bloated accounting features, no enterprise complexity.</p>
+        </div>
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon">📝</div>
+            <h3>Complaint Tracking</h3>
+            <p>
+              Residents submit issues with photos and details. Every complaint gets a ticket number and status that
+              residents can track themselves.
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">⚠️</div>
+            <h3>Violation Management</h3>
+            <p>Document rule violations with photo evidence, send automated notices, and track compliance deadlines.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">📢</div>
+            <h3>Resident Portal</h3>
+            <p>Give residents a way to submit requests, check status, and view announcements—no more phone tag.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🔔</div>
+            <h3>Smart Notifications</h3>
+            <p>
+              Automatic email updates when status changes. Board members get alerts for new complaints; residents know
+              when issues are resolved.
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">📄</div>
+            <h3>Document Storage</h3>
+            <p>Keep governing documents, meeting minutes, and architectural guidelines organized and accessible.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">📱</div>
+            <h3>Mobile Friendly</h3>
+            <p>Board members manage complaints from anywhere. Residents submit issues from their phones in seconds.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing" id="pricing">
+      <div class="container">
+        <div class="section-header">
+          <h2>Simple, Transparent Pricing</h2>
+          <p>No per-unit fees. No hidden charges. No surprise add-ons.</p>
+        </div>
+        <div class="pricing-grid">
+          <div class="pricing-card">
+            <h3>Starter</h3>
+            <p class="units">For communities under 100 units</p>
+            <div class="price">$49<span>/mo</span></div>
+            <p class="note">No hidden fees</p>
+            <ul class="pricing-features">
+              <li><span class="check">✓</span> Unlimited complaints & violations</li>
+              <li><span class="check">✓</span> Resident portal access</li>
+              <li><span class="check">✓</span> Email notifications</li>
+              <li><span class="check">✓</span> Document storage</li>
+              <li><span class="check">✓</span> Basic reporting</li>
+            </ul>
+            <a href="#waitlist" class="btn btn-outline" style="width: 100%;">Join Waitlist</a>
+          </div>
+          <div class="pricing-card featured">
+            <h3>Professional</h3>
+            <p class="units">For communities 100-200 units</p>
+            <div class="price">$99<span>/mo</span></div>
+            <p class="note">No hidden fees</p>
+            <ul class="pricing-features">
+              <li><span class="check">✓</span> Everything in Starter</li>
+              <li><span class="check">✓</span> Priority support</li>
+              <li><span class="check">✓</span> Advanced reporting</li>
+              <li><span class="check">✓</span> Multiple board members</li>
+              <li><span class="check">✓</span> Custom branding</li>
+            </ul>
+            <a href="#waitlist" class="btn btn-primary" style="width: 100%;">Join Waitlist</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Section -->
+    <section class="why">
+      <div class="container">
+        <div class="section-header">
+          <h2 style="color: white;">Why HOA Connect?</h2>
+          <p style="color: rgba(255, 255, 255, 0.7);">
+            We're different from the big guys. Here's why board members love us.
           </p>
+        </div>
+        <div class="why-grid">
+          <div class="why-item">
+            <div class="why-number">5+</div>
+            <h4>Min Unit Size</h4>
+            <p>No minimum requirements. We work with HOAs as small as 5 units.</p>
+          </div>
+          <div class="why-item">
+            <div class="why-number">10</div>
+            <h4>Minute Setup</h4>
+            <p>Get your HOA up and running in minutes, not days.</p>
+          </div>
+          <div class="why-item">
+            <div class="why-number">0</div>
+            <h4>Accounting Features</h4>
+            <p>We focus on complaints, not bookkeeping. That's your treasurer's job.</p>
+          </div>
+          <div class="why-item">
+            <div class="why-number">24/7</div>
+            <h4>Support</h4>
+            <p>Real help from people who understand HOA struggles.</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-          <form class="js-waitlist-form mt-6 space-y-4" novalidate>
-            <div>
-              <label for="waitlist-email-hero" class="block text-sm font-medium text-slate-800">Email</label>
-              <input
-                id="waitlist-email-hero"
-                name="email"
-                type="email"
-                autocomplete="email"
-                required
-                placeholder="board@yourhoa.org"
-                class="mt-1 w-full rounded-lg border border-slate-300 px-4 py-3 text-slate-900 placeholder:text-slate-400 focus:border-sky-500 focus:outline-none"
-              />
-            </div>
-            <div class="grid sm:grid-cols-2 gap-4">
-              <div>
-                <label for="waitlist-role-hero" class="block text-sm font-medium text-slate-800">Role (optional)</label>
-                <select
-                  id="waitlist-role-hero"
-                  name="role"
-                  class="mt-1 w-full rounded-lg border border-slate-300 px-4 py-3 text-slate-900 focus:border-sky-500 focus:outline-none"
-                >
-                  <option value="">Select role</option>
-                  <option value="board_member">Board member</option>
-                  <option value="resident">Resident</option>
-                  <option value="property_manager">Property manager</option>
-                </select>
-              </div>
-              <div>
-                <label for="waitlist-size-hero" class="block text-sm font-medium text-slate-800"
-                  >HOA size (optional)</label
-                >
-                <select
-                  id="waitlist-size-hero"
-                  name="hoa_size"
-                  class="mt-1 w-full rounded-lg border border-slate-300 px-4 py-3 text-slate-900 focus:border-sky-500 focus:outline-none"
-                >
-                  <option value="">Select size</option>
-                  <option value="1-25">1-25 units</option>
-                  <option value="26-50">26-50 units</option>
-                  <option value="51-100">51-100 units</option>
-                  <option value="101-200">101-200 units</option>
-                  <option value="201+">201+ units</option>
-                </select>
-              </div>
-            </div>
-
-            <button
-              type="submit"
-              data-track-cta="waitlist_submit_hero"
-              class="w-full rounded-lg bg-sky-600 px-4 py-3 font-semibold text-white hover:bg-sky-500 disabled:opacity-60"
-            >
-              Join Waitlist
-            </button>
-            <p class="js-form-message text-sm min-h-[1.25rem] text-slate-600" aria-live="polite"></p>
+    <!-- CTA Section -->
+    <section class="cta" id="waitlist">
+      <div class="container">
+        <div class="cta-content">
+          <h2>Ready to Simplify Your HOA?</h2>
+          <p>
+            Join the waitlist today and be the first to know when we launch. Early adopters get 50% off for the first 3
+            months.
+          </p>
+          <form class="hero-form" id="waitlistForm2" style="max-width: 500px; margin: 0 auto;">
+            <input
+              type="email"
+              placeholder="Enter your email address"
+              required
+              id="emailInput2"
+              style="flex: 1; padding: 16px 20px; border: 2px solid white; border-radius: 8px; font-size: 16px; background: rgba(255,255,255,0.1); color: white;"
+            />
+            <button type="submit" class="btn btn-white">Get Early Access</button>
           </form>
+          <div class="form-message" id="formMessage2"></div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section id="features" class="border-y border-slate-200 bg-slate-50/60">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-16 md:py-20">
-      <div class="max-w-3xl">
-        <p class="text-sm uppercase tracking-[0.2em] text-sky-600 font-semibold">Why Boards Switch</p>
-        <h2 class="mt-3 text-3xl md:text-4xl font-bold text-slate-900">Stop losing complaints in inbox chaos</h2>
-        <p class="mt-4 text-slate-600">
-          Research with HOA communities shows the same pattern: complaints disappear in email threads, residents feel
-          ignored, and volunteer board members burn out trying to keep up.
-        </p>
-      </div>
-
-      <div class="mt-10 grid md:grid-cols-2 gap-5">
-        <article class="rounded-xl border border-slate-200 bg-white p-6">
-          <h3 class="text-lg font-semibold text-slate-900">Scattered communication</h3>
-          <p class="mt-2 text-slate-600">
-            Requests arrive via calls, texts, and emails with no central source of truth.
-          </p>
-        </article>
-        <article class="rounded-xl border border-slate-200 bg-white p-6">
-          <h3 class="text-lg font-semibold text-slate-900">Inconsistent enforcement</h3>
-          <p class="mt-2 text-slate-600">
-            Violations and follow-ups slip through without clear ownership and timestamps.
-          </p>
-        </article>
-        <article class="rounded-xl border border-slate-200 bg-white p-6">
-          <h3 class="text-lg font-semibold text-slate-900">Resident frustration</h3>
-          <p class="mt-2 text-slate-600">Homeowners don’t know status, timelines, or who is handling their issue.</p>
-        </article>
-        <article class="rounded-xl border border-slate-200 bg-white p-6">
-          <h3 class="text-lg font-semibold text-slate-900">Enterprise tool overload</h3>
-          <p class="mt-2 text-slate-600">
-            Most alternatives are bloated, expensive, and built for management companies.
-          </p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section class="max-w-7xl mx-auto px-4 sm:px-6 py-16 md:py-20">
-    <div class="text-center max-w-3xl mx-auto">
-      <p class="text-sm uppercase tracking-[0.2em] text-sky-600 font-semibold">How It Works</p>
-      <h2 class="mt-3 text-3xl md:text-4xl font-bold text-slate-900">Three steps to a calmer HOA workflow</h2>
-    </div>
-
-    <div class="mt-12 grid md:grid-cols-3 gap-6">
-      <article class="rounded-xl border border-slate-200 p-6">
-        <p class="text-sm font-semibold text-sky-600">Step 1</p>
-        <h3 class="mt-2 text-xl font-semibold text-slate-900">Residents submit</h3>
-        <p class="mt-2 text-slate-600">Complaints and violation reports go into one portal with required context.</p>
-      </article>
-      <article class="rounded-xl border border-slate-200 p-6">
-        <p class="text-sm font-semibold text-sky-600">Step 2</p>
-        <h3 class="mt-2 text-xl font-semibold text-slate-900">Board triages</h3>
-        <p class="mt-2 text-slate-600">Assign owners, set priority, and track outcomes through a shared board view.</p>
-      </article>
-      <article class="rounded-xl border border-slate-200 p-6">
-        <p class="text-sm font-semibold text-sky-600">Step 3</p>
-        <h3 class="mt-2 text-xl font-semibold text-slate-900">Everyone stays updated</h3>
-        <p class="mt-2 text-slate-600">Automatic status updates reduce back-and-forth and improve trust.</p>
-      </article>
-    </div>
-  </section>
-
-  <section id="pricing" class="border-y border-slate-200 bg-slate-50/60">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-16 md:py-20">
-      <div class="max-w-3xl">
-        <p class="text-sm uppercase tracking-[0.2em] text-sky-600 font-semibold">Pricing Preview</p>
-        <h2 class="mt-3 text-3xl md:text-4xl font-bold text-slate-900">Simple pricing for volunteer-led communities</h2>
-      </div>
-
-      <div class="mt-10 grid lg:grid-cols-2 gap-6">
-        <article class="rounded-xl border border-slate-200 bg-white p-6">
-          <p class="text-sm text-slate-500">Starter</p>
-          <p class="mt-2 text-4xl font-bold text-slate-900">$49<span class="text-lg text-slate-500">/mo</span></p>
-          <p class="mt-2 text-slate-600">Best for HOAs up to 100 units.</p>
-          <ul class="mt-4 space-y-2 text-slate-700 list-disc pl-5">
-            <li>Complaint tracking portal</li>
-            <li>Violation workflow</li>
-            <li>Automated resident updates</li>
-          </ul>
-        </article>
-        <article class="rounded-xl border border-sky-300 bg-white p-6 shadow-sm">
-          <p class="text-sm text-slate-500">Professional</p>
-          <p class="mt-2 text-4xl font-bold text-slate-900">$99<span class="text-lg text-slate-500">/mo</span></p>
-          <p class="mt-2 text-slate-600">Best for communities with 101-200 units.</p>
-          <ul class="mt-4 space-y-2 text-slate-700 list-disc pl-5">
-            <li>Everything in Starter</li>
-            <li>Priority onboarding support</li>
-            <li>Enhanced board reporting</li>
-          </ul>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section class="max-w-4xl mx-auto px-4 sm:px-6 py-16 md:py-20">
-    <div class="rounded-2xl border border-slate-200 bg-white p-8 sm:p-10 text-center shadow-sm">
-      <p class="text-sm uppercase tracking-[0.2em] text-sky-600 font-semibold">Get Early Access</p>
-      <h2 class="mt-3 text-3xl font-bold text-slate-900">Help shape HOA Connect before public launch</h2>
-      <p class="mt-3 text-slate-600">
-        Join the waitlist to get beta access, launch updates, and early pricing details.
-      </p>
-
-      <form class="js-waitlist-form mt-8 max-w-2xl mx-auto space-y-4" novalidate>
-        <div class="grid sm:grid-cols-[1fr_auto] gap-3">
-          <input
-            name="email"
-            type="email"
-            autocomplete="email"
-            required
-            placeholder="board@yourhoa.org"
-            class="w-full rounded-lg border border-slate-300 px-4 py-3 text-slate-900 placeholder:text-slate-400 focus:border-sky-500 focus:outline-none"
-          />
-          <button
-            type="submit"
-            data-track-cta="waitlist_submit_footer"
-            class="rounded-lg bg-sky-600 px-6 py-3 font-semibold text-white hover:bg-sky-500 disabled:opacity-60"
-          >
-            Request Invite
-          </button>
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-left">
+            <a href="/" class="logo">
+              <div class="logo-icon">HC</div>
+            </a>
+            <p>© 2026 HOA Connect. All rights reserved.</p>
+          </div>
+          <div class="footer-links">
+            <a href="/privacy">Privacy Policy</a>
+            <a href="/terms">Terms of Service</a>
+            <a href="mailto:hello@hoaconnect.io">Contact</a>
+          </div>
         </div>
-        <input type="hidden" name="role" value="board_member" />
-        <input type="hidden" name="hoa_size" value="51-100" />
-        <p class="js-form-message text-sm min-h-[1.25rem] text-slate-600" aria-live="polite"></p>
-      </form>
-    </div>
-  </section>
+      </div>
+    </footer>
 
-  <script>
-    const STORAGE_KEY = 'hoa_connect_first_touch_utm';
-    const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-    /**
-     * @typedef {{
-     *   email: string;
-     *   role?: string;
-     *   hoa_size?: string;
-     *   utm_source?: string;
-     *   utm_medium?: string;
-     *   utm_campaign?: string;
-     * }} WaitlistPayload
-     */
-
-    /**
-     * @param {string} eventName
-     * @param {Record<string, unknown>} [props]
-     */
-    const track = (eventName, props = {}) => {
-      if (typeof window !== 'undefined' && typeof window.plausible === 'function') {
-        window.plausible(eventName, { props });
-      }
-    };
-
-    const captureFirstTouchUtm = () => {
-      const params = new URLSearchParams(window.location.search);
-      const next = {
-        utm_source: params.get('utm_source') || undefined,
-        utm_medium: params.get('utm_medium') || undefined,
-        utm_campaign: params.get('utm_campaign') || undefined,
-      };
-
-      if (!next.utm_source && !next.utm_medium && !next.utm_campaign) {
-        return;
+    <script>
+      // Mobile Menu Toggle
+      function toggleMobileMenu() {
+        const menu = document.getElementById('mobileMenu');
+        if (menu) {
+          menu.classList.toggle('active');
+        }
       }
 
-      if (!localStorage.getItem(STORAGE_KEY)) {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
-      }
-    };
+      const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const STORAGE_KEY = 'hoa_connect_first_touch_utm';
+      const SUPABASE_URL = import.meta.env.PUBLIC_SUPABASE_URL || '';
+      const SUPABASE_ANON_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY || '';
+      const ENDPOINT = SUPABASE_URL ? `${SUPABASE_URL}/functions/v1/waitlist-signup` : '';
 
-    const getStoredUtm = () => {
-      try {
-        const raw = localStorage.getItem(STORAGE_KEY);
-        return raw ? JSON.parse(raw) : {};
-      } catch {
-        return {};
-      }
-    };
-
-    const endpoint = (() => {
-      const supabaseUrl = import.meta.env.PUBLIC_SUPABASE_URL;
-      return supabaseUrl ? `${supabaseUrl}/functions/v1/waitlist-signup` : '';
-    })();
-
-    const supabaseAnonKey = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
-
-    /**
-     * @param {HTMLFormElement} form
-     * @param {string} text
-     * @param {'default' | 'error' | 'success'} [tone]
-     */
-    const setMessage = (form, text, tone = 'default') => {
-      const el = form.querySelector('.js-form-message');
-      if (!el) {
-        return;
-      }
-      el.textContent = text;
-      el.classList.remove('text-red-600', 'text-emerald-700', 'text-slate-600');
-      if (tone === 'error') {
-        el.classList.add('text-red-600');
-      } else if (tone === 'success') {
-        el.classList.add('text-emerald-700');
-      } else {
-        el.classList.add('text-slate-600');
-      }
-    };
-
-    /**
-     * @param {HTMLFormElement} form
-     * @param {boolean} isSubmitting
-     */
-    const setSubmitting = (form, isSubmitting) => {
-      const button = form.querySelector('button[type="submit"]');
-      if (button) {
-        button.disabled = isSubmitting;
-      }
-    };
-
-    /**
-     * @param {WaitlistPayload} payload
-     * @param {string} anonKey
-     */
-    const submitWaitlist = async (payload, anonKey) => {
-      const response = await fetch(endpoint, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          apikey: anonKey,
-          Authorization: `Bearer ${anonKey}`,
-        },
-        body: JSON.stringify(payload),
-      });
-
-      const data = await response.json().catch(() => ({}));
-
-      if (!response.ok) {
-        return { ok: false, code: data?.code || 'SERVER_ERROR' };
+      function track(eventName: string, props: Record<string, unknown> = {}) {
+        if (typeof window.plausible === 'function') {
+          window.plausible(eventName, { props });
+        }
       }
 
-      return { ok: true, status: data?.status || 'created' };
-    };
+      function captureFirstTouchUtm() {
+        const params = new URLSearchParams(window.location.search);
+        const next = {
+          utm_source: params.get('utm_source') || undefined,
+          utm_medium: params.get('utm_medium') || undefined,
+          utm_campaign: params.get('utm_campaign') || undefined,
+        };
 
-    const initWaitlistForms = () => {
-      const forms = document.querySelectorAll<HTMLFormElement>('form.js-waitlist-form');
-      if (!forms.length) {
-        return;
+        if (!next.utm_source && !next.utm_medium && !next.utm_campaign) {
+          return;
+        }
+
+        if (!localStorage.getItem(STORAGE_KEY)) {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
+        }
       }
 
-      track('waitlist_form_view', { path: window.location.pathname });
+      function getStoredUtm() {
+        try {
+          return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+        } catch {
+          return {};
+        }
+      }
 
-      forms.forEach((form) => {
-        form.addEventListener('submit', async (event) => {
-          event.preventDefault();
+      function setMessage(message: HTMLElement, text: string, isError: boolean) {
+        message.textContent = text;
+        message.className = `form-message ${isError ? 'error' : 'success'}`;
+      }
 
-          const formData = new FormData(form);
-          const email = String(formData.get('email') || '')
-            .trim()
-            .toLowerCase();
-          const role = String(formData.get('role') || '').trim();
-          const hoaSize = String(formData.get('hoa_size') || '').trim();
+      async function submitWaitlist(payload: Record<string, string | undefined>) {
+        const response = await fetch(ENDPOINT, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            apikey: SUPABASE_ANON_KEY,
+            Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+          },
+          body: JSON.stringify(payload),
+        });
+
+        const data = await response.json().catch(() => ({}));
+        if (!response.ok) {
+          return { ok: false, code: data.code || 'SERVER_ERROR' };
+        }
+
+        return { ok: true, status: data.status || 'created' };
+      }
+
+      function handleFormSubmit(formId: string, inputId: string, messageId: string) {
+        const form = document.getElementById(formId);
+        const input = document.getElementById(inputId);
+        const message = document.getElementById(messageId);
+        if (
+          !(form instanceof HTMLFormElement) ||
+          !(input instanceof HTMLInputElement) ||
+          !(message instanceof HTMLElement)
+        ) {
+          return;
+        }
+
+        form.addEventListener('submit', async function (e: SubmitEvent) {
+          e.preventDefault();
+
+          const email = input.value.trim();
+          const utm = getStoredUtm();
 
           if (!EMAIL_RE.test(email)) {
-            setMessage(form, 'Enter a valid email address.', 'error');
+            setMessage(message, 'Please enter a valid email address.', true);
             track('waitlist_error', { code: 'INVALID_EMAIL' });
             return;
           }
 
-          if (!endpoint || !supabaseAnonKey) {
-            setMessage(form, 'Signup is temporarily unavailable. Please try again soon.', 'error');
+          if (!ENDPOINT || !SUPABASE_ANON_KEY) {
+            setMessage(message, 'Signup is temporarily unavailable. Please try again soon.', true);
             track('waitlist_error', { code: 'CONFIG_MISSING' });
             return;
           }
 
-          const utm = getStoredUtm();
-          const payload = {
-            email,
-            role: role || undefined,
-            hoa_size: hoaSize || undefined,
-            utm_source: utm.utm_source,
-            utm_medium: utm.utm_medium,
-            utm_campaign: utm.utm_campaign,
-          };
-
-          setSubmitting(form, true);
-          setMessage(form, 'Submitting...');
-          track('waitlist_submit', { form: form.id || 'waitlist_form' });
+          const submitButton = form.querySelector('button[type="submit"]');
+          if (submitButton instanceof HTMLButtonElement) {
+            submitButton.disabled = true;
+          }
 
           try {
-            const result = await submitWaitlist(payload, supabaseAnonKey);
+            track('waitlist_submit', { form: formId });
+            const result = await submitWaitlist({
+              email: email.toLowerCase(),
+              utm_source: utm.utm_source,
+              utm_medium: utm.utm_medium,
+              utm_campaign: utm.utm_campaign,
+            });
 
             if (!result.ok) {
-              setMessage(form, 'Could not submit right now. Please try again.', 'error');
-              track('waitlist_error', { code: result.code });
+              setMessage(message, 'Could not submit right now. Please try again.', true);
+              track('waitlist_error', { code: result.code || 'SERVER_ERROR' });
               return;
             }
 
             if (result.status === 'duplicate') {
-              setMessage(form, 'You are already on the waitlist. We will keep you posted.', 'success');
+              setMessage(message, 'You are already on the waitlist. We will keep you posted.', false);
             } else {
-              setMessage(form, 'You are in. We will send launch updates to your inbox.', 'success');
-              form.reset();
+              setMessage(message, 'Thanks! We’ll notify you when we launch.', false);
             }
 
+            input.value = '';
             track('waitlist_success', { status: result.status });
           } catch {
-            setMessage(form, 'Network error. Please try again in a moment.', 'error');
+            setMessage(message, 'Network error. Please try again in a moment.', true);
             track('waitlist_error', { code: 'NETWORK_ERROR' });
           } finally {
-            setSubmitting(form, false);
+            if (submitButton instanceof HTMLButtonElement) {
+              submitButton.disabled = false;
+            }
+          }
+        });
+      }
+
+      captureFirstTouchUtm();
+      track('waitlist_form_view', { path: window.location.pathname });
+
+      const menuButton = document.getElementById('mobileMenuButton');
+      if (menuButton instanceof HTMLButtonElement) {
+        menuButton.addEventListener('click', toggleMobileMenu);
+      }
+      document.querySelectorAll<HTMLAnchorElement>('#mobileMenu a').forEach((link) => {
+        link.addEventListener('click', () => {
+          const menu = document.getElementById('mobileMenu');
+          if (menu && menu.classList.contains('active')) {
+            toggleMobileMenu();
           }
         });
       });
-    };
 
-    const initCtaTracking = () => {
-      const ctas = document.querySelectorAll('[data-track-cta]');
-      ctas.forEach((cta) => {
-        cta.addEventListener('click', () => {
-          const name = cta.getAttribute('data-track-cta') || 'unknown';
+      document.querySelectorAll<HTMLElement>('a.btn, .nav-links a').forEach((element) => {
+        element.addEventListener('click', () => {
+          const name = (element.textContent || 'cta').trim().toLowerCase().replace(/\s+/g, '_');
           track('cta_click_primary', { name });
         });
       });
-    };
 
-    captureFirstTouchUtm();
-    initWaitlistForms();
-    initCtaTracking();
-  </script>
-</PageLayout>
+      handleFormSubmit('waitlistForm', 'emailInput', 'formMessage');
+      handleFormSubmit('waitlistForm2', 'emailInput2', 'formMessage2');
+
+      // Navbar scroll effect
+      window.addEventListener('scroll', function () {
+        const nav = document.querySelector('nav');
+        if (nav instanceof HTMLElement) {
+          if (window.scrollY > 50) {
+            nav.style.boxShadow = 'var(--shadow)';
+          } else {
+            nav.style.boxShadow = 'none';
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
